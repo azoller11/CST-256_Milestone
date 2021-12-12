@@ -1,8 +1,12 @@
 <?php
+namespace App\Http\Controllers;
+
+
 session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 
 class userServices {
     public $servername = "localhost";
@@ -13,7 +17,7 @@ class userServices {
     // Create connection
     
     function getConn() {
-        $conn = new mysqli($this->servername, $this->username, $this->password, $this->database_in_use);
+        $conn = new \MySQLi($this->servername, $this->username, $this->password, $this->database_in_use);
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -44,7 +48,7 @@ class userServices {
     
     
     function registerUser($username, $password) {
-        $sql = "INSERT INTO user (ID, Username, Password) VALUES ('NULL', '".$username."', '".$password."')";
+        $sql = "INSERT INTO User (ID, Username, Password) VALUES ('NULL', '".$username."', '".$password."')";
         if ($this->getConn()->query($sql) === TRUE) {
             echo "Record inserted successfully";
         } else {
@@ -72,7 +76,7 @@ class userServices {
         } else {
             echo "Error updated record: " . getConn()->error;
         }
-        
+        $this->getConn()->close();
     }
     
     

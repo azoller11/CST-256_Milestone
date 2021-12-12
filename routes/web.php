@@ -23,6 +23,11 @@ Route::get('/register_form', function () {
     return view('register_form');
 });
 
+//my account
+Route::get('/myAccount', function () {
+    return view('myAccount');
+});
+
   
 Route::get('/Home', 'HomeController@Home');
 Route::get('/test', 'HomeController@test');

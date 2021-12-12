@@ -31,3 +31,11 @@ if (isset($_SESSION['username']))
 </div>
 </form>
 
+<form class="form-horizontal" action="myAccount">
+<div class="form-group">
+	<label for="submit" class="col-md-4 control-label"></label>
+	<div class="col-md-4">
+		<button id="submit" name="myAccount" class="btn btn-primary">My Account</button>
+	</div>
+</div>
+</form>
