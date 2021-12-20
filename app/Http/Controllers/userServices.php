@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 
 
-session_start();
+if(session_id() == '' || !isset($_SESSION) || session_status() === PHP_SESSION_NONE) {
+    // session isn't started
+    session_start();
+}
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -24,6 +27,16 @@ class userServices {
         } else {
             return $conn;
         }
+    }
+    
+    function updateUser($username, $password) {
+        $sql = "UPDATE user SET Username = '"+$username+"' AND SET Password = '"+$password+"' WHERE Username = '"+$username+"' AND WHERE Password = '"+$password+"'";
+        if ($this->getConn()->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updated record: " . getConn()->error;
+        }
+        $this->getConn()->close();
     }
     
     function loginUser($username, $password) {
@@ -69,15 +82,53 @@ class userServices {
         $this->getConn()->close();
     }
     
-    function updateUser($username, $password) {
-        $sql = "UPDATE user SET Username = '"+$username+"' AND SET Password = '"+$password+"' WHERE Username = '"+$username+"' AND WHERE Password = '"+$password+"'";
+    
+    function addInformation($userID, $text) {
+        $sql = "INSERT INTO account_info (userID, Information) VALUES ('".$userID."', '".$text."')";
         if ($this->getConn()->query($sql) === TRUE) {
-            echo "Record updated successfully";
+            echo "Record inserted successfully";
         } else {
-            echo "Error updated record: " . getConn()->error;
+            echo "Error inserting record: " . $this->getConn()->error;
+        }
+        
+        $this->getConn()->close();
+    }
+    function deleteInformation($ID) {
+        $sql = "DELETE FROM `account_info` WHERE `account_info`.`ID` = '".$ID."'";
+        if ($this->getConn()->query($sql) === TRUE) {
+            echo "Record deleted successfully";
+        } else {
+            echo "Error deleting record: " . getConn()->error;
+        }
+        
+        $this->getConn()->close();
+    }
+    
+    function getAllInformation($userID) {
+        $sql = "SELECT * FROM `account_info` WHERE account_info.userID =" .$userID;
+        $result = $this->getConn()->query($sql);
+        if ($result->num_rows > 0) {
+            
+            while($row = $result->fetch_assoc()) {
+                
+                echo " -  " . $row["Information"]."   <br>";
+                ?>
+                
+                <form class="form-horizontal" action="delete_post">
+                <div class="form-group">
+                <label for="submit" class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                <button id="ID" name="ID" class="btn btn-primary" value="<?php echo $row["ID"];?>">Delete Post</button>
+                </div>
+                </div>
+                </form>
+                <?php 
+                
+            }
         }
         $this->getConn()->close();
     }
+   
     
     
 }

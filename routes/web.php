@@ -27,7 +27,8 @@ Route::get('/register_form', function () {
 Route::get('/myAccount', function () {
     return view('myAccount');
 });
-
+Route::get('/process_post', 'AccountController@attemptPost');
+Route::get('/delete_post', 'AccountController@deletePost');
   
 Route::get('/Home', 'HomeController@Home');
 Route::get('/test', 'HomeController@test');
