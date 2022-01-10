@@ -27,6 +27,16 @@ Route::get('/register_form', function () {
 Route::get('/myAccount', function () {
     return view('myAccount');
 });
+
+//Affinity form
+Route::get('/addAffinity' , function() {
+    return view('addAffinity');
+});
+    Route::get('/myAffinity' , function() {
+        return view('myAffinity');
+    });
+
+
 Route::get('/process_post', 'AccountController@attemptPost');
 Route::get('/delete_post', 'AccountController@deletePost');
   
@@ -35,3 +45,5 @@ Route::get('/test', 'HomeController@test');
 
 Route::get('/process_login', 'LoginController@attemptLogin');
 Route::get('/process_register', 'LoginController@attemptRegister');
+
+Route::get('/process_newAffinity', 'AffinityController@attemptSubmit');
