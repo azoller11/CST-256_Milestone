@@ -32,9 +32,15 @@ Route::get('/myAccount', function () {
 Route::get('/addAffinity' , function() {
     return view('addAffinity');
 });
-    Route::get('/myAffinity' , function() {
-        return view('myAffinity');
-    });
+Route::get('/myAffinity' , function() {
+    return view('myAffinity');
+});
+
+//Jobs
+Route::get('/postedJobs', function () {
+    return view('postedJobs');
+});
+
 
 
 Route::get('/process_post', 'AccountController@attemptPost');

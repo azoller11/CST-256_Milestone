@@ -39,3 +39,12 @@ if (isset($_SESSION['username']))
 	</div>
 </div>
 </form>
+
+<form class="form-horizontal" action="postedJobs">
+<div class="form-group">
+	<label for="submit" class="col-md-4 control-label"></label>
+	<div class="col-md-4">
+		<button id="submit" name="postedJobs" class="btn btn-primary">Posted Jobs</button>
+	</div>
+</div>
+</form>
